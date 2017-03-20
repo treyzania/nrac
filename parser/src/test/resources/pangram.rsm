@@ -1,0 +1,82 @@
+@arch x86
+
+// a comment
+
+/* long comment */
+
+/*
+ * multiline comment
+ */
+
+object myobject {
+	
+	// anonymous subroutine, all gets executed
+	sub {
+		
+		// comment in a sub
+		
+	}
+	
+	sub mysub {
+	
+	}
+	
+	sub section<mycustomsection> myothersub {
+		
+	}
+	
+	func myfunc(i32 %myarg) {
+		
+		return myarg; // a return
+		
+	}
+	
+	func myotherfunc(ptr %mypointer, i32 %num) {
+		
+		// assignment
+		$eax = %mypointer;
+		
+		// dereference
+		$eax = [$eax + 2]
+		
+		// addition
+		add $eax, %num;
+		
+		// branch
+		if ($eax < 0) {
+			
+			// literal assignment
+			$eax = 0;
+			
+		}
+		
+		return $eax;
+		
+	}
+	
+	func noargfunc() {
+		
+		// a call to a subroutine
+		call mysub;
+		
+	}
+	
+	func anotherfunc(u8 %num) {
+		
+		$eax = %num;
+		
+		// while loop
+		while ($eax > 0) {
+			
+			// post-decrement
+			$eax--;
+			
+		}
+		
+		// post-increment
+		$eax++;
+		
+	}
+	
+}
+

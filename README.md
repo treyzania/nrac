@@ -1,5 +1,7 @@
 # nrac : The *New* RapidASM Compiler
 
+[![Build Status](https://travis-ci.org/treyzania/nrac.svg?branch=master)](https://travis-ci.org/treyzania/nrac)
+
 After making a lot of incorrect decisions in the implementation of my original
 compiler for RapidASM, and after finding a few problems with the design of the
 language as a whole, I have elected to rewrite it from scratch, but still in

@@ -9,62 +9,70 @@
  */
 
 object myobject {
-	
+
+	val u32 $somevalue = 42;
+	var u8 $mybyte = 255;
+	var i8 $mysbyte = 127;
+	var str $myszstring = "Hello, World!";
+	val section<foo> i32 myweirdvalue = 1337;
+
 	// anonymous subroutine, all gets executed
+	!label "someentrypoint"
 	sub {
-		
+
 		// comment in a sub
-		
+
 	}
-	
+
 	sub mysub {
-	
+
 	}
-	
+
 	sub section<mycustomsection> myothersub {
-		
+
 	}
-	
+
 	func myfunc(i32 %myarg) {
-		
 		return myarg; // a return
-		
 	}
-	
+
+	!label "labelonafunc"
 	func myotherfunc(ptr %mypointer, i32 %num) {
-		
+
 		// assignment
 		$eax = %mypointer;
-		
+
 		// dereference
 		$eax = [$eax + 2]
-		
+
 		// addition
 		add $eax, %num;
-		
+
 		// branch
+		!label "labelonabranch"
 		if ($eax < 0) {
-			
+
 			// literal assignment
 			$eax = 0;
-			
+
 		}
-		
+
 		return $eax;
-		
+
 	}
-	
+
 	func noargfunc() {
-		
+
 		// a call to a subroutine
+		!label "labelonaninstruction"
 		call mysub;
-		
+
 	}
-	
+
 	func anotherfunc(u8 %num) {
-		
+
 		$eax = %num;
-		
+
 		// while loop
 		while ($eax > 0) {
 			
@@ -72,11 +80,11 @@ object myobject {
 			$eax--;
 			
 		}
-		
+
 		// post-increment
 		$eax++;
-		
+
 	}
-	
+
 }
 

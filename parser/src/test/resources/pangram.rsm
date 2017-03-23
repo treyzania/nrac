@@ -43,7 +43,7 @@ object myobject {
 		$eax = %mypointer;
 
 		// dereference
-		$eax = [$eax + 2]
+		// FIXME Make this possible: $eax = [$eax + 2]
 
 		// addition
 		add $eax, %num;

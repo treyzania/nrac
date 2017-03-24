@@ -10,11 +10,13 @@ would be relatively similar on other architectures.
 
 Let's take an object like this:
 
-    object foo {
-        func u32 bar(u16 a, ptr b) {
-            // ...
-        }
-    }
+```
+object foo {
+	func u32 bar(u16 a, ptr b) {
+		// ...
+	}
+}
+```
 
 Push the arguments onto the stack from left to right.  So if we assume the
 following mappings:
@@ -24,16 +26,20 @@ following mappings:
 
 ...then this would translate into:
 
-    pushw %ax
-    pushl %edx
+```asm
+pushw %ax
+pushl %edx
+```
 
 The name mangling is usually pretty consistent, but for our function above
 would be `rsm_foo_bar`.  So the full sequence for calling our function `bar`
 would be this:
 
-    pushw %ax
-    pushl %edx
-    call rsm_foo_bar
+```asm
+pushw %ax
+pushl %edx
+call rsm_foo_bar
+```
 
 ## Returning
 
@@ -42,19 +48,25 @@ execute the `ret` instruction.  So if we assume that for some reason our return
 value is in our `ebx` register, then our whole call procedure would be the
 following, including cleaning up the stack (assuming the stack grows downward):
 
-    pushl %ebx
-    ret
+```asm
+pushl %ebx
+ret
+```
 
 But this happens automatically, so we don't have to actually write it, the RSM
 code for this would be:
 
-    return %ebx;
+```
+return %ebx;
+```
 
 And you could get that value back and into `ebx` again (after cleaning up the
 stack):
 
-	popl %ebx
-	add %esp, $6
+```asm
+popl %ebx
+add %esp, $6
+```
 
 ## Conclusion
 
@@ -63,20 +75,21 @@ would probably look something like the following.  Remember that `nrac` does
 this all for you, so you generally don't have to unless you're doing something
 special.
 
-    inline uint32_t barwrapper(uint16_t a, void* b) {	
-    	uint32_t ret = 0;
-    	size_t diff = sizeof(uint16_t) + sizeof(void*);
-    	asm (
-    		"push %1\n\t"
-    		"push %2\n\t"
-    		"call rsm_bar_foo\n\t"
-    		"pop %0\n\t"
-    		"add %%esp, %3"
-    		: "=g" (ret)
-    		: "g" (a), "g" (b), "g" (diff)
-    		: "cc" // If the function does any branching, etc.
-    		);
-    	return ret;
-    }
-
+```c
+inline uint32_t barwrapper(uint16_t a, void* b) {	
+	uint32_t ret = 0;
+	size_t diff = sizeof(uint16_t) + sizeof(void*);
+	asm (
+		"push %1\n\t"
+		"push %2\n\t"
+		"call rsm_bar_foo\n\t"
+		"pop %0\n\t"
+		"add %%esp, %3"
+		: "=g" (ret)
+		: "g" (a), "g" (b), "g" (diff)
+		: "cc" // If the function does any branching, etc.
+		);
+	return ret;
+}
+```
 

@@ -22,7 +22,7 @@ objectMember : valDef
 valDef : label* ValToken sectionSpec? litTypename Identifier '=' literal ';' ;
 
 // Vars get stored in the `.bss` section unless otherwise specified.
-varDef : label* VarToken sectionSpec? litTypename Identifier '=' literal ';' ;
+varDef : label* VarToken sectionSpec? litTypename Identifier ';' ;
 
 /*
  * Subroutines and funtions are both in the `.text` section unless otherwise

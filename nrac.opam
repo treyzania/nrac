@@ -1,0 +1,9 @@
+opam-version: "1.2"
+name: "nrac"
+version: "0.1"
+
+build: ["jbuilder" "build" "-j" jobs "-p" name "@install"]
+depends: [
+  "jbuilder" {build}
+  "batteries"
+]

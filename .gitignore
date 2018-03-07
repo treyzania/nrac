@@ -1,3 +1,4 @@
-
-# OCaml output
+# OCaml is dumb
 _build/
+.merlin
+*.install
